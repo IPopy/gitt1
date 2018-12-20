@@ -1,0 +1,15 @@
+## Git ##
+
+I will study Git and GitHub for 20 hours.
+A hour that I used for study Git in May 31th.
+AA hour that I have study Git in June 1th.
+A hour study Git in June 2th. 
+
+## Markdown ##
+
+I will study how to use the Markdown, it can use for write book and code code!
+
+I used MarkdownPad from May 31th, ereryday I have write something about me or my work, and Git them to repository. 
+
+
+ 
