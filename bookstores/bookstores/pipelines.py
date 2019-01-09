@@ -37,12 +37,12 @@ class MongoDBPipeline(object):
     
     @classmethod
     def from_crawler(cls, crawler):
-        cls.DB_URL = crawler.settings.get('MONGO_DB_URL', 'mongodb://123:1/')
+        cls.DB_URL = crawler.settings.get('MONGO_DB_URI', 'mongodb://123:1/')
         cls.DB_NAME = crawler.settings.get('MONGO_DB_NAME', 'abc')
         
         return cls()
     
-#    DB_URL = 'mongodb://localhost:27017/'
+#    DB_URI = 'mongodb://localhost:27017/'
 #    DB_NAME = 'scrapy_data'
     
     def open_spider(self, spider):

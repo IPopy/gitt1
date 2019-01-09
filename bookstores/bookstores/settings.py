@@ -91,5 +91,9 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MONGO_DB_URL = 'mongodb://localhost:27017/'
+MONGO_DB_URI = 'mongodb://localhost:27017/'
 MONGO_DB_NAME = 'zcy_scrapy_data'
+
+FEED_EXPORTERS = {'excel': 'bookstores.my_exporter.ExcelItemExporter'}
+FEED_URI = 'b.xls'
+FEED_FORMAT = 'excel'
