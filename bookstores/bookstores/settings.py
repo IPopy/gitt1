@@ -65,9 +65,12 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'bookstores.pipelines.PriceConverterPipeline': 300,
-    'bookstores.pipelines.DuplicatesPipeline':350,
+    'bookstores.pipelines.DuplicatesPipeline':150,
+    'bookstores.pipelines.BookPipeline':200,
+    
+    'bookstores.pipelines.PriceConverterPipeline': 300, 
     'bookstores.pipelines.MongoDBPipeline':400,
+    
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -94,6 +97,8 @@ ITEM_PIPELINES = {
 MONGO_DB_URI = 'mongodb://localhost:27017/'
 MONGO_DB_NAME = 'zcy_scrapy_data'
 
-FEED_EXPORTERS = {'excel': 'bookstores.my_exporter.ExcelItemExporter'}
-FEED_URI = 'b.xls'
-FEED_FORMAT = 'excel'
+#FEED_EXPORTERS = {'excel': 'bookstores.my_exporter.ExcelItemExporter'}
+#FEED_URI = 'b.xls'
+#FEED_FORMAT = 'excel'
+
+FEED_EXPORT_FIELDS = ['upc', 'name', 'price', 'stock', 'review_rating', 'review_num']
