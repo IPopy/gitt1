@@ -65,9 +65,11 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapy.pipelines.files.FilesPipeline': 1,
+    #'scrapy.pipelines.files.FilesPipeline': 1,
+    'scrapy.pipelines.images.ImagesPipeline':2,
 }
 FILES_STORE = 'file_src'
+IMAGES_STORE = 'image_src'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
