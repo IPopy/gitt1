@@ -36,5 +36,5 @@ class BookSpider(scrapy.Spider):
         book['upc'] = sel.xpath('(.//tr)[1]/td/text()').extract_first()
         book['stock'] = sel.xpath('(.//tr)[6]/td/text()').re('\((\d+) available\)')
         book['review_num'] = sel.xpath('(.//tr)[last()]/td/text()').extract_first()
-        
+        book['url'] = response.url
         yield book

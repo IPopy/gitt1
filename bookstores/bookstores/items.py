@@ -23,3 +23,4 @@ class BookItem(scrapy.Item):
     review_num = Field()        #评价数量
     upc = Field()               #产品编码
     stock = Field()             #库存数量
+    url = Field()               #链接
