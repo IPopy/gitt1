@@ -1,0 +1,12 @@
+1:start_urls = ['http://http://example.webscraping.com/places/default/user/profile']
+A:多了个 'http://'
+2:allowed_domains = ['http://example.webscraping.com']
+A:domain不是URL
+3:fd = {'email':' spzhangcy@gmail.com', 'passwordl':'123456'}
+A:email中有一个空格，passworld写成了passwordl
+4:在控制台中输入'scrapy crawl logins -o a.json' 无结果
+A:显示错误；FILE "logins.py",line 34, in parse_login yield from super().start_request()
+AttributeError:'super' object hs no attribute 'start_request'
+属性名写错了，把 'start_requests' 写成了 'start_request'
+5:显示错误：FILE "logins.py" line 11, in parse keys = response.css('table label::text').re('(.+):)')
+A:多了个')'
