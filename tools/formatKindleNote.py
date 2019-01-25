@@ -10,6 +10,7 @@ Created on Fri Jan 11 23:05:14 2019
 # 打开文件，读取一行，关闭文件
 file = open('D:\\Documents\\formatKindleNote.txt', 'r', encoding='utf8')
 notes = file.readlines()
+
 file.close()
 
 # 处理文字

@@ -1,0 +1,6 @@
+
+[<Selector xpath="descendant-or-self::div[@id = 'dialog_reg']/descendant-or-self::*/img" data='<img class="verImg">'>]
+[<Selector xpath="descendant-or-self::div[@id = 'dialog_reg']/descendant-or-self::*/img" data='<img class="verImg">'>]
+[<Selector xpath="descendant-or-self::div[@id = 'dialog_tel']/descendant-or-self::*/img" data='<img class="verImg">'>]
+[<Selector xpath="descendant-or-self::div[@id = 'dialog_tel']/descendant-or-self::*/img" data='<img class="verImg">'>]
+[<Selector xpath="descendant-or-self::div[@id = 'dialog_tel']/descendant-or-self::*/img" data='<img class="verImg">'>]
