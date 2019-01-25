@@ -69,6 +69,7 @@ ITEM_PIPELINES = {
 }
 IMAGES_STORE = 'download_images'
 
+REDIRECT_ENABLED = False  
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
@@ -93,11 +94,16 @@ IMAGES_STORE = 'download_images'
 # Splash 服务器地址
 SPLASH_URL = 'http://localhost:8050'
 
+# 伪装成正常浏览器
+USER_AGENT = 'Chrome/71.0.3578.98 Firefox/64.0.2'
 # 开启 Splash 的两个下载中间件，并调整 HttpCompressionMiddleware的次序
 DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.cookies.CookiesMiddleware':None,
+    'login.middlewares.BrowserCookiesMiddleware':701,
     'scrapy_splash.SplashCookiesMiddleware': 723,
     'scrapy_splash.SplashMiddleware': 725,
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+    
 }
 
 # 设置去冲过滤器

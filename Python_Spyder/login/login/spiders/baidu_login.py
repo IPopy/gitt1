@@ -19,29 +19,20 @@ lua_script = """
 function main(splash)
     
     splash:wait(0.5)
-    splash:go("https://hrb.lianjia.com")
+    splash:go("https://www.baidu.com")
     splash:wait(0.5)
-    splash:runjs("document.getElementsByClassName('totellog')[0].click()")
+    splash:runjs("document.getElementsByName('tj_login')[1].click()")
+    splash:wait(0.5)
+    splash:runjs("document.getElementsByClassName('tang-pass-footerBarULogin')[0].click()")
     return splash:html()
 end 
 """
 
-# 用户名密码登录界面
-#lua_script = """
-#function main(splash)
-#    
-#    splash:wait(0.5)
-#    splash:go("https://hrb.lianjia.com")
-#    splash:wait(0.5)
-#    splash:runjs("document.getElementsByClassName('reg')[0].click()")
-#    return splash:html()
-#end 
-#"""
 
-class KuwoLoginSpider(scrapy.Spider):
-    name = 'kuwo_login'
-    allowed_domains = ['hrb.lianjia.com']
-    start_urls = 'https://hrb.lianjia.com'
+class BaiduLoginSpider(scrapy.Spider):
+    name = 'baidu_login'
+    allowed_domains = ['www.baidu.com']
+    start_urls = 'https://www.baidu.com'
 
     def parse(self, response):
         pass
@@ -56,7 +47,7 @@ class KuwoLoginSpider(scrapy.Spider):
 #        file.close()
     
     
-    # 链家网页的登录页面
+    # 百度网页的登录页面
     #login_url = 'https://upassport.lianjia.com/dist/js/passport.js'
     user = '18324519124'
     password = 'xiaoXIAO585lj'
