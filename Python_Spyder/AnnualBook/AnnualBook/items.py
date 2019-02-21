@@ -28,3 +28,4 @@ class AnnualListItem(scrapy.Item):
     bookname = Field()          #书名
     link = Field()              #链接
     score = Field()             #豆瓣评分
+    index = Field()             #榜单内排名

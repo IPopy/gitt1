@@ -2,8 +2,8 @@
 
 #
 # author:zcy
-# time:2019-02-19
-# fuction:爬取豆瓣2015-2018年度书单
+# time:2019-02-21
+# fuction:爬取豆瓣2015年度书单
 
 import scrapy
 from scrapy import Request
@@ -13,19 +13,19 @@ from ..items import AnnualListItem
 from scrapy.linkextractors import LinkExtractor
 from string import digits
 
-lua_script = """
-function main(splash)
-    splash:go(splash.args.url)
-    splash:wait(0.5)
-    splash:runjs("document.getElementsByClassName('down-btn')[0].click()")
-    return splash:html()
-end
-"""
+#lua_script = """
+#function main(splash)
+#    splash:go(splash.args.url)
+#    splash:wait(0.5)
+#    splash:runjs("document.getElementsByClassName('down-btn')[0].click()")
+#    return splash:html()
+#end
+#"""
 #    splash:wait(0.5)
 #    splash:runjs("document.getElementsByClassName('down-btn')[0].scrollIntoView(true)")
 #
 class DoubanbookSpider(scrapy.Spider):
-    name = 'doubanBook'
+    name = 'doubanBook-2015'
     allowed_domains = ['book.douban.com']
     start_urls = ['http://book.douban.com/']
 
@@ -42,16 +42,30 @@ class DoubanbookSpider(scrapy.Spider):
         pass
     
     def parse(self, response):       
-        # 提取 2015 年度榜单的 CSS 样式
-        listnames= response.css('tr.top-column')
+        
         annuallist = AnnualListItem()
-        for l in listnames:
+        
+        # 提取所有 2015 年度榜单的 CSS 样式
+        lists = response.css('div.section.top-10-widget')
+        
+        # 每次循环处理一个榜单
+        for l in lists:
+            
             # 提取榜单名称
-            name = l.css('div::text').extract()
-            a = [x for x in name if '\n' not in x]
+            lname= l.css('tr.top-column div::text').extract()              
+            a = [x for x in lname if '\n' not in x]
             b = ''.join(a)
             annuallist['listname'] = b
-            yield annuallist
+            
+            # 提取该榜单内的书名和评分
+            books = l.css('div.subjects-section a')
+            for index,book in enumerate(books):              
+                d = book.css('p::text').extract()
+                e = [x for x in d if '\n' not in x]                
+                annuallist['bookname'] = e[0]
+                annuallist['score'] = e[1]
+                annuallist['index'] = index
+                yield annuallist
         
         
         
