@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for proxy_example project
+# Scrapy settings for AnnualBook project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,25 +9,34 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'proxy_example'
+BOT_NAME = 'AnnualBook'
 
-SPIDER_MODULES = ['proxy_example.spiders']
-NEWSPIDER_MODULE = 'proxy_example.spiders'
+SPIDER_MODULES = ['AnnualBook.spiders']
+NEWSPIDER_MODULE = 'AnnualBook.spiders'
 
-# Splash 服务器地址
-SPLASH_URL = 'http://localhost:8050'
-
+USER_AGENT = 'Chrome/72.0.3626.109'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'proxy_example (+http://www.yourdomain.com)'
+#USER_AGENT = 'AnnualBook (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+# Splash服务器地址
+SPLASH_URL = 'http://localhost:8050'
+
+# 开启Splash的两个下载中间件并调整HttpCompressionMiddleware的次序
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
+
+
+MONGODB_URI = 'mongodb://localhost:27017'
+MONGODB_NAME = 'zcy_scrapy_data'
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
-
-USER_AGENT = 'Chrome/72.0.3626.109'
-
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -52,14 +61,13 @@ USER_AGENT = 'Chrome/72.0.3626.109'
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'proxy_example.middlewares.ProxyExampleSpiderMiddleware': 543,
+#    'AnnualBook.middlewares.AnnualbookSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-#    'proxy_example.middlewares.ProxyExampleDownloaderMiddleware': 543,
-    'proxy_example.middlewares.RandomHttpProxyMiddleware':745,
+#    'AnnualBook.middlewares.RandomHttpProxyMiddleware': 745,
 }
 HTTPPROXY_PROXY_LIST_FILE = 'proxy.json'
 # Enable or disable extensions
@@ -71,8 +79,7 @@ HTTPPROXY_PROXY_LIST_FILE = 'proxy.json'
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    #'proxy_example.pipelines.ProxyExamplePipeline': 300,
-    'proxy_example.pipelines.MongoDBPipeline':403,
+    'AnnualBook.pipelines.MongoDBPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -95,8 +102,4 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
-
-MONGODB_URI = 'mongodb://localhost:27017'
-MONGODB_DB_NAME = 'zcy_scrapy_data'
-
+FEED_EXPORT_ENCODING = 'utf-8'

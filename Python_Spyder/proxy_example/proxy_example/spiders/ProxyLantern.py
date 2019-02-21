@@ -9,18 +9,19 @@ Created on Mon Feb 18 15:20:50 2019
 import scrapy
 from scrapy import Request
 import json
-
+import time
 
 class ProxyLanternSpider(scrapy.Spider):
     name = 'ProxyLantern'
-    allowed_domains = ['free-proxy-list.net/']
-    start_urls = ['https://free-proxy-list.net/']
+    allowed_domains = ['free-proxy-list.net']
+    start_urls = ['https://free-proxy-list.net']
      
     def start_requests(self):
         # 请求第一页
         yield Request('https://free-proxy-list.net/')
       
     def parse(self, response):
+        
         for sel in response.css('div.table-responsive tr'):
             # 提取代理的 IP、port、scheme（http or https）
             ip = sel.css('td:nth-child(1)::text').extract_first()
@@ -30,7 +31,7 @@ class ProxyLanternSpider(scrapy.Spider):
             if sel.css('td:nth-child(7)::text').extract_first() == 'yes':
                 scheme = "https"
             else:
-                scheme = "http"
+                continue
 
             
             # 使用爬取到的代理再次发送请求到 http(s)://httpbin.org/ip, 验证代理是否可用
@@ -58,4 +59,16 @@ class ProxyLanternSpider(scrapy.Spider):
             yield {
                 'proxy_scheme': response.meta['_proxy_scheme'],
                 'proxy': response.meta['proxy'],
+                'time':time.localtime()
             }
+            
+        if response.meta['proxy'] == "https://134.249.142.70:47204" or \
+        response.meta['proxy'] == "https://198.27.67.35:3128" or \
+        response.meta['proxy'] == "https://123.201.19.116:44978" or \
+        response.meta['proxy'] == "https://46.165.49.41:47712" :
+            yield {
+                'proxy_scheme': response.meta['_proxy_scheme'],
+                'proxy': response.meta['proxy'],
+            }
+            
+

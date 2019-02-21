@@ -6,9 +6,8 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy import Field
 
-
+# 图书表
 class ProxyExampleItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
     pass

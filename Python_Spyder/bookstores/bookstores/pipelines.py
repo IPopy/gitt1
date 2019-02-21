@@ -54,7 +54,11 @@ class MongoDBPipeline(object):
         
     def process_item(self, item, spider):
         collection = self.db[spider.name]
-        post = dict(item) if isinstance(item, Item) else Item
+         
+		if isinstance(item, Item):	
+			post = dict(item)
+		else:
+			Item
         collection.insert_one(post)
         return item
     

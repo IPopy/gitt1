@@ -6,7 +6,7 @@ Created on Mon Feb 18 15:20:50 2019
 @author: Administrator
 """
 
-# -*- coding: utf-8 -*-
+import os
 import scrapy
 from scrapy import Request
 import json
@@ -14,30 +14,32 @@ from scrapy_splash import SplashRequest
 
 lua_script = """
 function main(splash)
-    splash:go(splash.args.url)
+    splash:go("https://free-proxy-list.net/")
     splash:wait(2)
     splash:runjs("document.getElementsByClassName('fg-button ui-button ui-state-default next')[0].click()")
     splash:wait(2)
     return splash:html()
-end"""
+end
+"""
 
 class ProxyLanternSpider2(scrapy.Spider):
     name = 'ProxyLantern2'
-    allowed_domains = ['free-proxy-list.net/']
-    start_urls = ['https://free-proxy-list.net/']
+    allowed_domains = ['free-proxy-list.net']
+    base_url = 'https://free-proxy-list.net/'
      
     def start_requests(self):
         # 请求第一页，无需 js 渲染
         #yield Request('https://free-proxy-list.net/')
-        yield Request('https://free-proxy-list.net', callback=self.parse_url, dont_filter=True)
-    
-    def parse_url(self, response):
-        # 点击 next 获取前三页的代理
-        url = 'https://free-proxy-list.net/'
-#        for i in range(2):
-#        yield SplashRequest(url, endpoint='execute', args={'lua_source':lua_script}, cache_args=['lua_source'])
+        yield Request(self.base_url, callback=self.parse_urls, dont_filter=True)
+        
+    def parse_urls(self, response):
+        # 点击 next 获取前三页的代理        
+        for i in range(10):
+            
+            yield SplashRequest(url=self.base_url, endpoint='execute', args={'lua_source':lua_script}, cache_args=['lua_source'])
         
     def parse(self, response):
+        
         for sel in response.css('div.table-responsive tr'):
             # 提取代理的 IP、port、scheme（http or https）
             ip = sel.css('td:nth-child(1)::text').extract_first()
@@ -47,14 +49,12 @@ class ProxyLanternSpider2(scrapy.Spider):
             if sel.css('td:nth-child(7)::text').extract_first() == 'yes':
                 scheme = "https"
             else:
-                continue        # http代理不使用
-
+                continue        # http代理不使用            
             yield{
                 'IP':ip,
                 'port':port,
                 'scheme':scheme,
             }
-            
             # 使用爬取到的代理再次发送请求到 http(s)://httpbin.org/ip, 验证代理是否可用
             url = '%s://httpbin.org/ip' % scheme
             proxy = '%s://%s:%s' % (scheme, ip, port)
