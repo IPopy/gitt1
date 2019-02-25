@@ -62,13 +62,6 @@ class ProxyLanternSpider(scrapy.Spider):
                 'time':time.localtime()
             }
             
-        if response.meta['proxy'] == "https://134.249.142.70:47204" or \
-        response.meta['proxy'] == "https://198.27.67.35:3128" or \
-        response.meta['proxy'] == "https://123.201.19.116:44978" or \
-        response.meta['proxy'] == "https://46.165.49.41:47712" :
-            yield {
-                'proxy_scheme': response.meta['_proxy_scheme'],
-                'proxy': response.meta['proxy'],
-            }
+       
             
 

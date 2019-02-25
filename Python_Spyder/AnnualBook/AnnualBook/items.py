@@ -9,15 +9,20 @@ import scrapy
 from scrapy import Field
 
 # 图书表 
-class AnnualBookItem(scrapy.Item):
+class BookItem(scrapy.Item):
     name = Field()              #书名
     author = Field()            #作者
-    date = Field()              #出版日期
+    date = Field()              #出版年
     ISBN = Field()              #ISBN
     page = Field()              #页数
-    formerName = Field()        #原名
+    formername = Field()        #原作名
     translator = Field()        #译者
-    price = Field()             #价格
+    price = Field()             #定价
+    zhuangzhen = Field()        #装帧
+    fubiaoti = Field()          #副标题
+    chupinfang = Field()        #出品方
+    chubanshe = Field()         #出版社
+    congshu = Field()           #丛书
     doubanScore = Field()       #豆瓣分数
     doubanManNum = Field()      #豆瓣评分人数
     

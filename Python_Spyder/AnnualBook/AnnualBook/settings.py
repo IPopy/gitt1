@@ -30,7 +30,10 @@ DOWNLOADER_MIDDLEWARES = {
 #    'scrapy_splash.SplashCookiesMiddleware': 723,
 #    'scrapy_splash.SplashMiddleware': 725,
 #    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+#    'AnnualBook.middlewares.RandomHttpProxyMiddleware': 745,
 }
+HTTPPROXY_PROXY_LIST_FILE = 'proxy.json'
+
 
 DOWNLOAD_TIMEOUT = '15000'
 MONGODB_URI = 'mongodb://localhost:27017'
@@ -65,12 +68,8 @@ MONGODB_NAME = 'zcy_scrapy_data'
 #    'AnnualBook.middlewares.AnnualbookSpiderMiddleware': 543,
 #}
 
-# Enable or disable downloader middlewares
-# See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'AnnualBook.middlewares.RandomHttpProxyMiddleware': 745,
-#}
-HTTPPROXY_PROXY_LIST_FILE = 'proxy.json'
+
+
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {

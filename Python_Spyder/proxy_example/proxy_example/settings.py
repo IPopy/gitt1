@@ -59,7 +59,7 @@ USER_AGENT = 'Chrome/72.0.3626.109'
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
 #    'proxy_example.middlewares.ProxyExampleDownloaderMiddleware': 543,
-    'proxy_example.middlewares.RandomHttpProxyMiddleware':745,
+#    'proxy_example.middlewares.RandomHttpProxyMiddleware':745,
 }
 HTTPPROXY_PROXY_LIST_FILE = 'proxy.json'
 # Enable or disable extensions

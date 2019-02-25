@@ -8,7 +8,6 @@
 import scrapy
 from scrapy import Request
 
-from ..items import AnnualBookItem
 from ..items import AnnualListItem
 from selenium import webdriver
 import json
