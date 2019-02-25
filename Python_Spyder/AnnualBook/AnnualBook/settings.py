@@ -13,8 +13,8 @@ BOT_NAME = 'AnnualBook'
 
 SPIDER_MODULES = ['AnnualBook.spiders']
 NEWSPIDER_MODULE = 'AnnualBook.spiders'
-
-USER_AGENT = 'Chrome/72.0.3626.109'
+#
+#USER_AGENT = 'Chrome/72.0.3626.109'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'AnnualBook (+http://www.yourdomain.com)'
 
@@ -22,16 +22,17 @@ USER_AGENT = 'Chrome/72.0.3626.109'
 ROBOTSTXT_OBEY = False
 
 # Splash服务器地址
-SPLASH_URL = 'http://localhost:8050'
+#SPLASH_URL = 'http://localhost:8050'
 
 # 开启Splash的两个下载中间件并调整HttpCompressionMiddleware的次序
 DOWNLOADER_MIDDLEWARES = {
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+#    'AnnualBook.middlewares.ChromeDownloaderMiddleware': 543,
+#    'scrapy_splash.SplashCookiesMiddleware': 723,
+#    'scrapy_splash.SplashMiddleware': 725,
+#    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
-
+DOWNLOAD_TIMEOUT = '15000'
 MONGODB_URI = 'mongodb://localhost:27017'
 MONGODB_NAME = 'zcy_scrapy_data'
 
@@ -66,9 +67,9 @@ MONGODB_NAME = 'zcy_scrapy_data'
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
+#DOWNLOADER_MIDDLEWARES = {
 #    'AnnualBook.middlewares.RandomHttpProxyMiddleware': 745,
-}
+#}
 HTTPPROXY_PROXY_LIST_FILE = 'proxy.json'
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -103,3 +104,7 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 FEED_EXPORT_ENCODING = 'utf-8'
+
+# 浏览器路径
+CHROME_PATH = r''  # 可以指定绝对路径，如果不指定的话会在$PATH里面查找
+CHROME_DRIVER_PATH = r''  # 可以指定绝对路径，如果不指定的话会在$PATH里面查找
