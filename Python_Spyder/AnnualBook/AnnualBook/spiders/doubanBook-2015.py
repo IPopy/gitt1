@@ -41,7 +41,8 @@ class DoubanbookSpider(scrapy.Spider):
                 annuallist['bookname'] = e[0]
                 annuallist['score'] = e[1]
                 annuallist['index'] = index
-                yield annuallist
+#                annuallist['link'] = 
+                yield annuallist 
                 return 
         
         

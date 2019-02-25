@@ -80,7 +80,9 @@ HTTPPROXY_PROXY_LIST_FILE = 'proxy.json'
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    'AnnualBook.pipelines.DuplicatesPipeline':300,
     'AnnualBook.pipelines.MongoDBPipeline': 301,
+    
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

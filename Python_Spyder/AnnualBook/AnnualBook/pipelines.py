@@ -9,6 +9,7 @@
 #from scrapy import Item
 #from ..items import ProxyExampleItem
 from pymongo import MongoClient
+from scrapy.exceptions import DropItem
 
 # 暂时没想好
 class BookPipeline(object):
@@ -44,4 +45,14 @@ class MongoDBPipeline(object):
         collection = self.db[spider.name]
         collection.insert_one(item)
           
+class DuplicatesPipeline(object):
     
+    def __init__(self):
+        self.book_set = set()
+        
+    def process_item(self, item, spider):
+        name = item['name']
+        if name in self.book_set:
+            raise DropItem("Duplicate book found: %s" % item)
+        self.book_set.add(name)
+        return item    
